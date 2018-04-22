@@ -23,7 +23,7 @@ def WriteUUID(myuuid):
 
 #change alter ID
 def WriteAlterId(alterId):
-    config[u"inbound"][u"settings"][u"clients"][0][u"alterId"]=str(alterId)
+    config[u"inbound"][u"settings"][u"clients"][0][u"alterId"]=int(alterId)
     Write()
 
 #更改端口
