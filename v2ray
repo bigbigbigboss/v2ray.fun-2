@@ -85,11 +85,12 @@ if [[ ${choice} == 2 ]]; then
     echo "4.更改传输方式"
     echo "5.更改TLS设置"
     echo "6.更改广告拦截功能"
+    echo "7.更改alterId"
     echo "请输入数字选择功能："
 
     while :; do echo
 	    read -n1 -p "请选择： " changechoice
-	    if [[ ! $changechoice =~ ^[1-6]$ ]]; then
+	    if [[ ! $changechoice =~ ^[1-7]$ ]]; then
             if [[ -z ${changechoice} ]];then
                 bash /usr/local/bin/v2ray
                 exit 0
@@ -100,6 +101,14 @@ if [[ ${choice} == 2 ]]; then
 		    break
 	    fi
     done
+    if [[ ${changechoice} == 7 ]]; then
+        python /usr/local/v2ray.fun/change_alter_ID.py
+        python /usr/local/v2ray.fun/genclient.py
+	    service v2ray restart
+        echo ""
+        echo "alterId修改成功！"
+        bash /usr/local/bin/v2ray
+    fi
     
     if [[ ${changechoice} == 1 ]]; then
         python /usr/local/v2ray.fun/changeuuid.py

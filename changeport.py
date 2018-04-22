@@ -2,23 +2,8 @@
 # -*- coding: utf-8 -*-
 import readjson
 import writejson
+from utils import is_number
 
-#判断是否为数字的函数
-def is_number(s):
-    try:
-        float(s)
-        return True
-    except ValueError:
-        pass
- 
-    try:
-        import unicodedata
-        unicodedata.numeric(s)
-        return True
-    except (TypeError, ValueError):
-        pass
- 
-    return False
 
 #主要程序部分
 print ("当前主端口为：%s") % str(readjson.ConfPort)

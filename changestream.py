@@ -2,23 +2,7 @@
 # -*- coding: utf-8 -*-
 import readjson
 import writejson
-
-#判断是否为数字的函数
-def is_number(s):
-    try:
-        float(s)
-        return True
-    except ValueError:
-        pass
- 
-    try:
-        import unicodedata
-        unicodedata.numeric(s)
-        return True
-    except (TypeError, ValueError):
-        pass
- 
-    return False
+from utils import is_number
 
 #读取配置文件信息
 mystreamnetwork=str(readjson.ConfStreamNetwork)
