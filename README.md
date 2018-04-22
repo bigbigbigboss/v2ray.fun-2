@@ -39,17 +39,17 @@ V2ray控制脚本，向导式更改端口，加密方式，传输协议，享受
 ## 安装命令
 
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/tracyone/v2ray.fun/master/install.sh)"
+bash -c "$(curl -fsSL https://git.io/vpOeN)"
 ```
 
 ## 升级命令
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/tracyone/v2ray.fun/master/upgrade.sh)"
+bash -c "$(curl -fsSL https://git.io/vpOex)"
 ```
 
 ## 卸载命令
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/tracyone/v2ray.fun/master/uninstall.sh)"
+bash -c "$(curl -fsSL https://git.io/vpOep)"
 ```
 
 
