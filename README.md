@@ -11,7 +11,7 @@
     * [软件要求](#软件要求)
     * [更新日志](#更新日志)
     * [特别说明](#特别说明)
-    * [感谢](#感谢)
+* [Buy me a coffee](#buy-me-a-coffee)
 
 <!-- vim-markdown-toc -->
 
@@ -87,15 +87,12 @@ bash -c "$(curl -fsSL https://git.io/vpOep)"
 
 ## 特别说明
 
-有任何问题或者新功能想法欢迎提交 Issue，我会抽空回答。
-
 也可以先查看下本仓库的[wiki](https://github.com/tracyone/v2ray.fun/wiki)
 
 本程序遵循 GPL v3协议发布，请Fork保留源项目地址，谢谢！
 
-
-## 感谢
-
 V2ray : [https://v2ray.com](https://v2ray.com)
 
-v2ray.fun的原作者: [YLWS-4617](https://github.com/YLWS-4617)
+# Buy me a coffee
+
+![donation](https://cloud.githubusercontent.com/assets/4246425/24827592/553bc732-1c7f-11e7-8207-284cccbc2e5c.jpg)
