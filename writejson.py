@@ -14,7 +14,15 @@ def Write():
     openjsonfile=file("/etc/v2ray/config.json","w+")
     openjsonfile.writelines(myjsondump)
     openjsonfile.close()
-    
+
+def EnDynPort(en):
+    if en == 1:
+        config[u"inbound"][u"settings"].update({u"detour":{u"to":"dynamicPort"}})
+    else:
+        if "detour" in config[u"inbound"][u"settings"]:
+            del config[u"inbound"][u"settings"][u"detour"]
+    Write()
+
 #更改UUID
 def WriteUUID(myuuid):
     config[u"inbound"][u"settings"][u"clients"][0][u"id"]=str(myuuid)
