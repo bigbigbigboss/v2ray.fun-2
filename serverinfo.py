@@ -37,4 +37,7 @@ print("UUID：%s") % str(readjson.ConfUUID)
 print("alter ID: %s") % str(readjson.ConfAlterId)
 print("加密方式：%s") % str(readjson.ConfSecurity)
 print("传输方式：%s") % str(mystreamnetwork)
-print("%s") % str(mystreamsecurity)
+if readjson.ConfigDynPortRange:
+    print("动态端口范围:%s") % str(readjson.ConfigDynPortRange)
+else:
+    print("动态端口:禁止")

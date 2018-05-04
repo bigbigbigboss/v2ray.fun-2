@@ -19,8 +19,8 @@ def Write():
 def EnDynPort(en):
     if en == 1:
         config[u"inbound"][u"settings"].update({u"detour":{u"to":"dynamicPort"}})
-        dyn_port=file("/usr/local/v2ray.fun/json_template/dyn_port.json")
-        srtp=json.load(dyn_port)
+        dyn_port = file("/usr/local/v2ray.fun/json_template/dyn_port.json")
+        srtp = json.load(dyn_port)
         config[u"inboundDetour"]=srtp
         config[u"inboundDetour"][0][u"settings"][u"default"][u"alterId"]=int(readjson.ConfAlterId)
     else:
@@ -28,6 +28,11 @@ def EnDynPort(en):
         if "detour" in config[u"inbound"][u"settings"]:
             del config[u"inbound"][u"settings"][u"detour"]
     Write()
+
+def UpdateDynPort(min_port,max_port):
+    config[u"inboundDetour"][0][u"port"]=str(min_port) + '-' + str(max_port)
+    Write()
+
 
 #更改UUID
 def WriteUUID(myuuid):
@@ -49,7 +54,7 @@ def WritePort(myport):
 def WriteSecurity(mysecurity):
     config[u"inbound"][u"settings"][u"clients"][0][u"security"]=str(mysecurity)
     Write()
-    
+
 #更改底层传输设置
 def WriteStreamNetwork(network,para):
     security_backup=config[u"inbound"][u"streamSettings"][u"security"]
@@ -64,7 +69,7 @@ def WriteStreamNetwork(network,para):
         http=json.load(streamfile)
         http[u"tcpSettings"][u"header"][u"request"][u"headers"][u"Host"]=para
         config[u"inbound"][u"streamSettings"]=http
-        
+
     if (network == "ws"):
         streamfile=file("/usr/local/v2ray.fun/json_template/ws.json")
         ws=json.load(streamfile)
@@ -75,23 +80,23 @@ def WriteStreamNetwork(network,para):
         streamfile=file("/usr/local/v2ray.fun/json_template/kcp.json")
         kcp=json.load(streamfile)
         config[u"inbound"][u"streamSettings"]=kcp
-        
+
     if (network == "mkcp" and para=="kcp utp"):
         streamfile=file("/usr/local/v2ray.fun/json_template/kcp_utp.json")
         utp=json.load(streamfile)
         config[u"inbound"][u"streamSettings"]=utp
-        
+
     if (network == "mkcp" and para=="kcp srtp"):
         streamfile=file("/usr/local/v2ray.fun/json_template/kcp_srtp.json")
         srtp=json.load(streamfile)
         config[u"inbound"][u"streamSettings"]=srtp
 
-        
+
     if (network == "mkcp" and para=="kcp wechat-video"):
         streamfile=file("/usr/local/v2ray.fun/json_template/kcp_wechat.json")
         wechat=json.load(streamfile)
         config[u"inbound"][u"streamSettings"]=wechat
-    
+
     config[u"inbound"][u"streamSettings"][u"security"] = security_backup
     config[u"inbound"][u"streamSettings"][u"tlsSettings"] = tls_settings_backup
     Write()

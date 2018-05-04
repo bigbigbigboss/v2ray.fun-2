@@ -8,7 +8,7 @@ print ("当前UUID为：%s") % str(readjson.ConfUUID)
 print ("是否要随机生成一个新的UUID (y/n)：")
 ifgenuuid = raw_input()
 
-if  ifgenuuid=="y":
+if  ifgenuuid=="y" or ifgenuuid == '':
     newuuid=uuid.uuid1()
     print("新的UUID为：%s") % newuuid
     writejson.WriteUUID(newuuid)

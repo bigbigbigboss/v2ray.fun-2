@@ -40,7 +40,7 @@ if ( not is_number(newstreamnetwork)):
     exit
 else:
     if not (newstreamnetwork > 0 and newstreamnetwork<8):
-        
+
         if(newstreamnetwork=="1"):
             writejson.WriteStreamNetwork("tcp","none")
         elif(newstreamnetwork=="2"):

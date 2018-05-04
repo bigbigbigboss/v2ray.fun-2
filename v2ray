@@ -12,11 +12,12 @@ echo "1.服务管理"
 echo "2.更改配置"
 echo "3.查看服务端信息"
 echo "4.下载客户端配置文件"
+echo "5.更新v2ray和v2ray.fun"
 echo "请输入数字选择功能(按回车键退出)："
 
 while :; do echo
 	read -n1 -p "请选择： " choice
-	if [[ ! $choice =~ ^[1-4]$ ]]; then
+	if [[ ! $choice =~ ^[1-5]$ ]]; then
         if [[ -z ${choice} ]];then
             exit 0
         fi
@@ -27,6 +28,9 @@ while :; do echo
 	fi
 done
 
+if [[ ${choice} == 5 ]]; then
+    bash -c "$(curl -fsSL https://git.io/vpOex)"
+fi
 if [[ ${choice} == 1 ]]; then
     echo "1.启动服务"
     echo "2.停止服务"

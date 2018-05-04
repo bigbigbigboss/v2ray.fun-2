@@ -25,6 +25,11 @@ ConfStreamKcpSettings=ConfStream[u'kcpSettings']
 ConfStreamNetwork=ConfStream[u"network"]
 ConfStreamSecurity=ConfStream[u"security"]
 
+if config[u"inboundDetour"] and "port" in config[u"inboundDetour"][0]:
+    ConfigDynPortRange=config[u"inboundDetour"][0][u"port"]
+else:
+    ConfigDynPortRange=""
+
 if ConfStreamNetwork=="kcp" :
     if ConfStreamKcpSettings.has_key('header'):
         ConfStreamHeader=ConfStreamKcpSettings[u"header"][u'type']

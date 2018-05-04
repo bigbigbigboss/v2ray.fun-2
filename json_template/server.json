@@ -18,7 +18,10 @@
                     "alterId": 100,
                     "security": null
                 }
-            ]
+            ],
+            "detour": {
+                "to": "dynamicPort"
+            }
         },
         "streamSettings": {
             "security": "",
