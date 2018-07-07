@@ -24,10 +24,14 @@ fi
 
 #安装依赖
 if [[ ${OS} == 'CentOS' ]];then
-	yum install curl wget unzip git ntp ntpdate lrzsz python socat -y
+    curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
+	yum install curl wget unzip git ntp ntpdate lrzsz python socat nodejs -y
+    npm install -g qrcode
 else
+    curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 	apt-get update
-	apt-get install curl unzip git ntp wget ntpdate python socat lrzsz -y
+	apt-get install curl unzip git ntp wget ntpdate python socat lrzsz nodejs -y
+    npm install -g qrcode
 fi
 
 #安装 acme.sh 以自动获取SSL证书

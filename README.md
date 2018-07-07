@@ -97,9 +97,14 @@ bash -c "$(curl -fsSL https://git.io/vpOep)"
 - 支持修改alterID
 - 支持动态端口的使能和禁止
 
-2018.6.11
+**2018.6.11**
 - 支持修改动态端口的范围
 - 增加菜单：更新v2ray以及v2ray.fun
+
+**2018.7.7**
+
+- 支持生成v2rayN(windows以及安卓) & Pepi(IOS) 客户端的
+vmess链接和qrcode图片，支持通过用sz将qr图片传到本机。
 
 ## 特别说明
 

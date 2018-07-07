@@ -184,10 +184,24 @@ fi
 
 if [[ ${choice} == 4 ]]; then
     python /usr/local/v2ray.fun/genclient.py && echo "保存成功！(/root/config.json)"
-    read -n1 -p  "是否通过sz来传输配置文件(y/n)" ans
+    read -n1 -p  "是否通过sz来传输json配置文件(y/n)" ans
     if [[ ${ans} =~ [yY] ]]; then
         which sz 2>/dev/null && sz /root/config.json
     fi
     echo -e "\n"
+    if [[ -f  "/root/config_v2rayN.png"  ]]; then
+        read -n1 -p  "是否通过sz来传输qrcode图片(v2rayN)(y/n)" ans
+        if [[ ${ans} =~ [yY] ]]; then
+            which sz 2>/dev/null && sz /root/config_v2rayN.png
+        fi
+        echo -e "\n"
+    fi
+    if [[ -f  "/root/config_pepi.png"  ]]; then
+        read -n1 -p  "是否通过sz来传输qrcode图片(pepi)(y/n)" ans
+        if [[ ${ans} =~ [yY] ]]; then
+            which sz 2>/dev/null && sz /root/config_pepi.png
+        fi
+        echo -e "\n"
+    fi
     bash /usr/local/bin/v2ray
 fi
