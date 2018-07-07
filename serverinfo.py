@@ -46,7 +46,7 @@ else:
 
 config = {
     "v": "2",
-    "ps": "v2rayN & v2rayNG 2.0 config",
+    "ps": "v2rayN V2.x",
     "add": "",
     "port": "",
     "id": "",
@@ -54,7 +54,7 @@ config = {
     "net": "",
     "type": "none",
     "host": "",
-    "path": "/",
+    "path": "",
     "tls": "",
 }
 
@@ -76,6 +76,7 @@ base64Str = base64.encodestring(json.dumps(config))
 base64Str = ''.join(base64Str.split())
 vmessurl="vmess://"+base64Str
 #green show
+print("=====  v2rayN V2.x =====\n")
 print("\033[32m")
 print("%s") % vmessurl
 print("\033[0m")
@@ -92,6 +93,7 @@ else:
 
 base64Str=base64.urlsafe_b64encode(str(readjson.ConfSecurity)+":"+str(readjson.ConfUUID)+"@"+str(myip)+":"+str(readjson.ConfPort))
 vmessurl="vmess://"+base64Str+"?obfs="+str(mystreamnetwork)
+print("=====  Pepi(ios) 1.0.7(87) =====\n")
 print("\033[32m")
 print("%s") % vmessurl
 print("\033[0m")
