@@ -4,6 +4,7 @@ import os
 import json
 import readjson
 import urllib2
+import serverinfo
 
 #写客户端配置文件函数
 def WriteClientJson():

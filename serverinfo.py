@@ -44,57 +44,65 @@ if readjson.ConfigDynPortRange:
 else:
     print("动态端口:禁止")
 
-config = {
-    "v": "2",
-    "ps": "v2rayN V2.x",
-    "add": "",
-    "port": "",
-    "id": "",
-    "aid": "",
-    "net": "",
-    "type": "none",
-    "host": "",
-    "path": "",
-    "tls": "",
-}
-
-config["add"] = str(myip)
-config["port"] = str(readjson.ConfPort)
-config["id"] = str(readjson.ConfUUID)
-config["aid"] = str(readjson.ConfAlterId)
-config["net"] = str(mystreamnetwork)
-
-if mystreamnetwork == "kcp":
-    config["type"] = str(readjson.ConfStreamHeader)
-
-if (readjson.ConfSecurity == "tls"):
-    config["tls"] = "tls"
 
 # config["host"] = str(readjson.ConfPath)
 
-base64Str = base64.encodestring(json.dumps(config))
-base64Str = ''.join(base64Str.split())
-vmessurl="vmess://"+base64Str
-#green show
-print("=====  v2rayN V2.x =====\n")
-print("\033[32m")
-print("%s") % vmessurl
-print("\033[0m")
-os.system("qrcode -w 200 -o ~/config_v2rayN.png "+ vmessurl)
+def GetVmessUrl():
+    config = {
+        "v": "2",
+        "ps": "v2rayN V2.x",
+        "add": "",
+        "port": "",
+        "id": "",
+        "aid": "",
+        "net": "",
+        "type": "none",
+        "host": "",
+        "path": "",
+        "tls": "",
+    }
+    config["add"] = str(myip)
+    config["port"] = str(readjson.ConfPort)
+    config["id"] = str(readjson.ConfUUID)
+    config["aid"] = str(readjson.ConfAlterId)
+    config["net"] = str(mystreamnetwork)
+    if mystreamnetwork == "kcp":
+        config["type"] = str(readjson.ConfStreamHeader)
+    if (readjson.ConfSecurity == "tls"):
+        config["tls"] = "tls"
+    base64Str = base64.encodestring(json.dumps(config))
+    base64Str = ''.join(base64Str.split())
+    vmessurl="vmess://"+base64Str
+    return vmessurl
 
-mystreamnetwork=str(readjson.ConfStreamNetwork)
+def GetVmessUrlPepi():
+    mystreamnetwork=str(readjson.ConfStreamNetwork)
+    if readjson.ConfStreamNetwork=="http":
+        mystreamnetwork="http"
+    elif readjson.ConfStreamNetwork=="ws":
+        mystreamnetwork="websocket"
+    else:
+        mystreamnetwork="none"
+    base64Str=base64.urlsafe_b64encode(str(readjson.ConfSecurity)+":"+str(readjson.ConfUUID)+"@"+str(myip)+":"+str(readjson.ConfPort))
+    vmessurl="vmess://"+base64Str+"?obfs="+str(mystreamnetwork)
+    return vmessurl
 
-if readjson.ConfStreamNetwork=="http":
-    mystreamnetwork="http"
-elif readjson.ConfStreamNetwork=="ws":
-    mystreamnetwork="websocket"
-else:
-    mystreamnetwork="none"
 
-base64Str=base64.urlsafe_b64encode(str(readjson.ConfSecurity)+":"+str(readjson.ConfUUID)+"@"+str(myip)+":"+str(readjson.ConfPort))
-vmessurl="vmess://"+base64Str+"?obfs="+str(mystreamnetwork)
-print("=====  Pepi(ios) 1.0.7(87) =====\n")
-print("\033[32m")
-print("%s") % vmessurl
-print("\033[0m")
-os.system("qrcode -w 200 -o ~/config_pepi.png "+ vmessurl)
+def GreenShow(string):
+    print("\033[32m")
+    print("%s") % string
+    print("\033[0m")
+
+def GenQRCode(name, string):
+    os.system("qrcode -w 200 -o ~/"+ name + " " + string)
+
+def ShowQRCode(string):
+    os.system("qrcode -w 200 "+string)
+
+print("=====  V2rayN v2.x =====")
+GreenShow(GetVmessUrl())
+GenQRCode("config_v2rayN.png", GetVmessUrl())
+
+print("=====  Pepi(ios) 1.0.7(87) =====")
+GreenShow(GetVmessUrlPepi())
+GenQRCode("config_pepi.png", GetVmessUrlPepi())
