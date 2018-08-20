@@ -10,7 +10,8 @@ print ("请选择新的加密方式：")
 print ("1.aes-128-cfb")
 print ("2.aes-128-gcm")
 print ("3.chacha20-poly1305")
-print ("4.none")
+print ("4.auto")
+print ("5.none")
 newsecurity=raw_input()
 
 if ( not is_number(newsecurity)):
@@ -24,6 +25,8 @@ else:
     elif(newsecurity=="3"):
         writejson.WriteSecurity("chacha20-poly1305")
     elif(newsecurity=="4"):
+        writejson.WriteSecurity("auto")
+    elif(newsecutity=="5"):
         writejson.WriteSecurity("none")
     else:
-        print("请输入1-4之间的数字！")
+        print("请输入1-5之间的数字！")
