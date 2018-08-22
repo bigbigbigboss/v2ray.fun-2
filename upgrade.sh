@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-#检查系统信息
+# 检查系统信息
 if [ -f /etc/redhat-release ];then
         OS='CentOS'
     elif [ ! -z "`cat /etc/issue | grep bian`" ];then
@@ -13,7 +13,7 @@ if [ -f /etc/redhat-release ];then
         exit 1
 fi
 
-#安装依赖
+# 安装依赖
 if [[ ${OS} == 'CentOS' ]];then
     curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
 	yum install curl wget unzip git ntp ntpdate lrzsz python socat nodejs -y
@@ -25,22 +25,22 @@ else
     npm install -g qrcode
 fi
 
-#重装V2ray.fun
+# 重装V2ray.fun
 rm -rf /usr/local/v2ray.fun
 cd /usr/local/
 git clone https://github.com/tracyone/v2ray.fun
 cd /usr/local/v2ray.fun/
 chmod +x *.py
 
-#重装操作菜单
+# 重装操作菜单
 rm -rf /usr/local/bin/v2ray
 ln -sf /usr/local/v2ray.fun/v2ray /usr/local/bin/
 chmod +x /usr/local/bin/v2ray
 
-#更新Vray主程序
+# 更新Vray主程序
 bash <(curl -L -s https://install.direct/go.sh)
 
-#初始化环境
+# 初始化环境
 python /usr/local/v2ray.fun/openport.py
 service v2ray restart
 

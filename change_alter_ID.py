@@ -1,16 +1,14 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-# change alter ID
-import uuid
+# Change alterID
 import readjson
 import writejson
 from utils import is_number
 
-print ("当前AlterId为：%s") % str(readjson.ConfAlterId)
-alterid = raw_input("请输入新的alterID: ")
+print "当前AlterID为：{}".format(str(readjson.ConfAlterId))
+alterID = raw_input("请输入新的alterID: ")
 
-if (is_number(alterid)):
-    writejson.WriteAlterId(alterid)
+if (is_number(alterID)):
+    writejson.WriteAlterId(alterID)
 else:
-    print ("输入错误，请检查是否为数字")
-
+    print("输入错误，请检查是否为数字")

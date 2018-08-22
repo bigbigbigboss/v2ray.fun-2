@@ -5,29 +5,33 @@ import getssl
 import writejson
 import urllib2
 
+
 def get_ip():
     myip = urllib2.urlopen('http://members.3322.org/dyndns/getip').read()
     myip = myip.strip()
     return str(myip)
 
+
 def open_tls():
     print("请将您的域名解析到本VPS的IP地址，否则程序会出错！！")
     print("本机器IP地址为：" + get_ip())
-    inputdomain=str(raw_input("请输入您绑定的域名："))
+    inputdomain = str(raw_input("请输入您绑定的域名："))
     print("")
     print("正在获取SSL证书，请稍等。")
     getssl.getssl(inputdomain)
-    writejson.WriteTLS("on",inputdomain)
+    writejson.WriteTLS("on", inputdomain)
     print("操作完成！")
+
 
 def close_tls():
-    writejson.WriteTLS("off","")
+    writejson.WriteTLS("off", "")
     print("操作完成！")
 
-if (readjson.ConfStreamSecurity=="tls"):
-    mystreamsecurity="TLS：开启"
+
+if (readjson.ConfStreamSecurity == "tls"):
+    mystreamsecurity = "TLS：开启"
 else:
-    mystreamsecurity="TLS：关闭"
+    mystreamsecurity = "TLS：关闭"
 
 print("当前状态：\n" + mystreamsecurity)
 print("")

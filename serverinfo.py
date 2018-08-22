@@ -6,33 +6,33 @@ import urllib2
 import base64
 import os
 import json
-#获取本机IP地址
+# 获取本机IP地址
 myip = urllib2.urlopen('http://api.ipify.org').read()
 myip = myip.strip()
 
-#判断传输配置
-mystreamnetwork=str(readjson.ConfStreamNetwork)
+# 判断传输配置
+mystreamnetwork = str(readjson.ConfStreamNetwork)
 
-if readjson.ConfStreamNetwork=="kcp" :
-    if(readjson.ConfStreamHeader=="utp"):
-        mystreamnetwork="mKCP 伪装 BT下载流量"
-    elif(readjson.ConfStreamHeader=="srtp"):
-        mystreamnetwork="mKCP 伪装 FaceTime通话"
-    elif(readjson.ConfStreamHeader=="wechat-video"):
-        mystreamnetwork="mKCP 伪装 微信视频流量"
+if readjson.ConfStreamNetwork == "kcp":
+    if(readjson.ConfStreamHeader == "utp"):
+        mystreamnetwork = "mKCP utp BT下载流量"
+    elif(readjson.ConfStreamHeader == "srtp"):
+        mystreamnetwork = "mKCP srtp 伪装FaceTime通话"
+    elif(readjson.ConfStreamHeader == "wechat-video"):
+        mystreamnetwork = "mKCP wechat-video 伪装微信视频流量"
     else:
-        mystreamnetwork="mKCP"
-elif readjson.ConfStreamNetwork=="http":
-    mystreamnetwork="HTTP伪装"
-elif readjson.ConfStreamNetwork=="ws":
-    mystreamnetwork="WebSocket"
+        mystreamnetwork = "mKCP"
+elif readjson.ConfStreamNetwork == "http":
+    mystreamnetwork = "HTTP/2"
+elif readjson.ConfStreamNetwork == "ws":
+    mystreamnetwork = "WebSocket"
 
-if (readjson.ConfStreamSecurity=="tls"):
-    mystreamsecurity="TLS：开启"
+if (readjson.ConfStreamSecurity == "tls"):
+    mystreamsecurity = "TLS：开启"
 else:
-    mystreamsecurity="TLS：关闭"
+    mystreamsecurity = "TLS：关闭"
 
-#输出信息
+# 输出信息
 print("服务器IP：%s") % str(myip)
 print("主端口：%s") % str(readjson.ConfPort)
 print("UUID：%s") % str(readjson.ConfUUID)
@@ -72,19 +72,21 @@ def GetVmessUrl():
         config["tls"] = "tls"
     base64Str = base64.encodestring(json.dumps(config))
     base64Str = ''.join(base64Str.split())
-    vmessurl="vmess://"+base64Str
+    vmessurl = "vmess://" + base64Str
     return vmessurl
 
+
 def GetVmessUrlPepi():
-    mystreamnetwork=str(readjson.ConfStreamNetwork)
-    if readjson.ConfStreamNetwork=="http":
-        mystreamnetwork="http"
-    elif readjson.ConfStreamNetwork=="ws":
-        mystreamnetwork="websocket"
+    mystreamnetwork = str(readjson.ConfStreamNetwork)
+    if readjson.ConfStreamNetwork == "http":
+        mystreamnetwork = "http"
+    elif readjson.ConfStreamNetwork == "ws":
+        mystreamnetwork = "websocket"
     else:
-        mystreamnetwork="none"
-    base64Str=base64.urlsafe_b64encode(str(readjson.ConfSecurity)+":"+str(readjson.ConfUUID)+"@"+str(myip)+":"+str(readjson.ConfPort))
-    vmessurl="vmess://"+base64Str+"?obfs="+str(mystreamnetwork)
+        mystreamnetwork = "none"
+    base64Str = base64.urlsafe_b64encode(str(readjson.ConfSecurity) + ":" + str(
+        readjson.ConfUUID) + "@" + str(myip) + ":" + str(readjson.ConfPort))
+    vmessurl = "vmess://" + base64Str + "?obfs=" + str(mystreamnetwork)
     return vmessurl
 
 
@@ -93,11 +95,14 @@ def GreenShow(string):
     print("%s") % string
     print("\033[0m")
 
+
 def GenQRCode(name, string):
-    os.system("qrcode -w 200 -o ~/"+ name + " " + string)
+    os.system("qrcode -w 200 -o ~/" + name + " " + string)
+
 
 def ShowQRCode(string):
-    os.system("qrcode -w 200 "+string)
+    os.system("qrcode -w 200 " + string)
+
 
 print("=====  V2rayN v2.x =====")
 GreenShow(GetVmessUrl())

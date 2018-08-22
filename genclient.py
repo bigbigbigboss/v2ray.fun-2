@@ -6,34 +6,41 @@ import readjson
 import urllib2
 import serverinfo
 
-#写客户端配置文件函数
+
+# 写客户端配置文件函数
 def WriteClientJson():
-    myjsondump=json.dumps(clientconfig,indent=1)
-    openjsonfile=file("/root/config.json","w+")
-    openjsonfile.writelines(myjsondump)
-    openjsonfile.close()
+    myJsonDump = json.dumps(clientConfig, indent=1)
+    openJsonFile = file("/root/config.json", "w+")
+    openJsonFile.writelines(myJsonDump)
+    openJsonFile.close()
 
-#获取本机IP地址
-myip = urllib2.urlopen('http://api.ipify.org').read()
-myip = myip.strip()
 
-#加载客户端配置模板
-clientjsonfile = file("/usr/local/v2ray.fun/json_template/client.json")
-clientconfig = json.load(clientjsonfile)
+# 获取本机IP地址
+myIP = urllib2.urlopen('http://api.ipify.org').read()
+myIP = myIP.strip()
 
-#使用服务端配置来修改客户端模板
-clientconfig[u"outbound"][u"settings"][u"vnext"][0][u"port"]=int(readjson.ConfPort)
-clientconfig[u"outbound"][u"settings"][u"vnext"][0][u"users"][0][u"id"]=str(readjson.ConfUUID)
-clientconfig[u"outbound"][u"settings"][u"vnext"][0][u"users"][0][u"security"]=str(readjson.ConfSecurity)
-clientconfig[u"outbound"][u"streamSettings"]=readjson.ConfStream
+# 加载客户端配置模板
+clientJsonFile = file("/usr/local/v2ray.fun/json_template/client.json")
+clientConfig = json.load(clientJsonFile)
+
+# 使用服务端配置来修改客户端模板
+clientConfig[u"outbound"][u"settings"][u"vnext"][0][u"port"] = int(
+    readjson.ConfPort)
+clientConfig[u"outbound"][u"settings"][u"vnext"][0][u"users"][0][u"id"] = str(
+    readjson.ConfUUID)
+clientConfig[u"outbound"][u"settings"][u"vnext"][0][u"users"][0][u"security"] = str(
+    readjson.ConfSecurity)
+clientConfig[u"outbound"][u"streamSettings"] = readjson.ConfStream
 if str(readjson.ConfStreamSecurity) == "":
-    clientconfig[u"outbound"][u"settings"][u"vnext"][0][u"address"]=str(myip)
+    clientConfig[u"outbound"][u"settings"][u"vnext"][0][u"address"] = str(myIP)
 else:
     domainfile = file("/usr/local/v2ray.fun/mydomain", "r")
     content = domainfile.read()
-    clientconfig[u"outbound"][u"settings"][u"vnext"][0][u"address"] = str(content)
+    clientConfig[u"outbound"][u"settings"][u"vnext"][0][u"address"] = str(
+        content)
     domainfile.close()
-    clientconfig[u"outbound"][u"streamSettings"][u"security"] = "tls"
-    clientconfig[u"outbound"][u"streamSettings"][u"tlsSettings"] = {}
-#写入客户端配置文件
+    clientConfig[u"outbound"][u"streamSettings"][u"security"] = "tls"
+    clientConfig[u"outbound"][u"streamSettings"][u"tlsSettings"] = {}
+
+# 写入客户端配置文件
 WriteClientJson()
