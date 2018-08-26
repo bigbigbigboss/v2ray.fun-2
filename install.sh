@@ -57,6 +57,16 @@ python /usr/local/v2ray.fun/genclient.py
 python /usr/local/v2ray.fun/openport.py
 service v2ray restart
 
+# auto open port after start
+# append a new line
+cat /etc/rc.local | grep openport.py
+if [[ $? -ne 0 ]]; then
+cat>>/etc/rc.local<<EOF
+python /usr/local/v2ray.fun/openport.py
+EOF
+chmod a+x /etc/rc.local
+fi
+
 
 clear
 
