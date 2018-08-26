@@ -51,8 +51,10 @@ chmod +x /usr/bin/v2ray
 chmod +x /usr/local/bin/v2ray
 rm -rf /etc/v2ray/config.json
 cp /usr/local/v2ray.fun/json_template/server.json /etc/v2ray/config.json
+let PORT=$RANDOM+10000
 UUID=$(cat /proc/sys/kernel/random/uuid)
 sed -i "s/cc4f8d5b-967b-4557-a4b6-bde92965bc27/${UUID}/g" /etc/v2ray/config.json
+sed -i "s/12345/${PORT}/g" "/etc/v2ray/config.json"
 python /usr/local/v2ray.fun/genclient.py
 python /usr/local/v2ray.fun/openport.py
 service v2ray restart
